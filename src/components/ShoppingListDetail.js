@@ -1,8 +1,7 @@
-// src/components/ShoppingListDetail.js
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../css/ShoppingListDetail.module.css';
-import { shoppingData, addItemToShoppingList } from '../data/ShoppingListData';
+import { shoppingData } from '../data/ShoppingListData';
 
 const ShoppingListDetail = () => {
   const { id } = useParams();

@@ -5,6 +5,7 @@
   border: 2px solid #3498db;
   border-radius: 10px;
   background-color: #ecf0f1;
+  position: relative;
 }
 
 .list {
@@ -29,6 +30,33 @@
 
   &:hover {
     background-color: #f0f0f0;
+  }
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+.userDropdown {
+  margin-top: 10px;
+  margin-left: 66%;
+}
+
+.dropdown {
+  padding: 5px;
+}
+
+.deleteButton {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #c9302c;
   }
 }
 
