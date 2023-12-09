@@ -1,3 +1,4 @@
+/* Styly pro hlavní kontejner */
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -7,12 +8,14 @@
   background-color: #ecf0f1;
 }
 
+/* Styly pro seznam */
 .list {
   list-style: none;
   padding: 0;
   margin-top: 20px;
 }
 
+/* Styly pro položky seznamu */
 .item {
   margin-bottom: 10px;
   padding: 10px;
@@ -21,19 +24,19 @@
   justify-content: space-between;
   align-items: center;
 
-  /* Style for "todo" state */
+  /* Styl pro stav "todo" */
   background-color: #e74c3c;
   color: #fff;
 }
 
+/* Styl pro stav "done" */
 .item.done {
-  /* Style for "done" state */
   background-color: #2ecc71;
   color: #fff;
 }
 
+/* Společný styl pro text položky */
 .item span {
-  /* Common style for item text */
   flex: 1;
 }
 
@@ -41,6 +44,7 @@
   display: flex;
 }
 
+/* Styly pro tlačítko v položce */
 .item button {
   padding: 5px;
   background-color: #3498db;
@@ -55,6 +59,7 @@
   }
 }
 
+/* Styly pro formulář pro vytvoření nové položky */
 .newItemForm {
   margin-top: 20px;
   display: flex;
@@ -82,6 +87,7 @@
   }
 }
 
+/* Styly pro tlačítko zpět */
 .backButton {
   display: block;
   margin-top: 20px;

@@ -1,3 +1,4 @@
+/* Styly pro hlavní kontejner */
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -8,16 +9,19 @@
   position: relative;
 }
 
+/* Styly pro seznam */
 .list {
   list-style: none;
   padding: 0;
   margin-top: 20px;
 }
 
+/* Styly pro položky seznamu */
 .item {
   margin-bottom: 10px;
 }
 
+/* Styly pro odkazy v seznamu */
 .link {
   text-decoration: none;
   color: #333;
@@ -33,19 +37,23 @@
   }
 }
 
+/* Styly pro zaškrtávací pole */
 .checkbox {
   margin-left: 10px;
 }
 
+/* Styly pro uživatelský dropdown */
 .userDropdown {
   margin-top: 10px;
   margin-left: 66%;
 }
 
+/* Styly pro dropdown */
 .dropdown {
   padding: 5px;
 }
 
+/* Styly pro tlačítko smazání */
 .deleteButton {
   background-color: #d9534f;
   color: #fff;
@@ -60,6 +68,21 @@
   }
 }
 
+/* Styly pro tlačítko archivace */
+.archiveButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 5px;
+  
+  &:hover {
+    background-color: #024996;
+  }
+}
+
+/* Styly pro formulář pro vytvoření nového seznamu */
 .newListForm {
   margin-top: 20px;
   display: flex;

@@ -1,53 +1,117 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../css/ShoppingListDetail.module.css';
-import { shoppingData } from '../data/ShoppingListData';
 
+// Komponenta pro detailní zobrazení nákupního seznamu
 const ShoppingListDetail = () => {
+  // Získání id seznamu z URL parametrů
   const { id } = useParams();
+  
+  // Stavové proměnné pro správu formuláře a dat
   const [newItemName, setNewItemName] = useState('');
-  const [items, setItems] = useState(shoppingData.find((item) => item.id.toString() === id)?.items || []);
-  const shoppingList = shoppingData.find((item) => item.id.toString() === id);
+  const [items, setItems] = useState([]);
+  const [shoppingList, setShoppingList] = useState(null);
 
-  const handleAddItem = () => {
+  // Načtení dat nákupního seznamu při prvním renderu komponenty nebo změně id
+  useEffect(() => {
+    const fetchShoppingList = async () => {
+      try {
+        const response = await fetch(`http://localhost:3005/shoppingData/${id}`);
+        if (!response.ok) {
+          throw new Error(`Error fetching shopping list: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setShoppingList(data);
+        setItems(data.items || []);
+      } catch (error) {
+        console.error('Error fetching shopping list:', error);
+      }
+    };
+
+    fetchShoppingList();
+  }, [id]);
+
+  // Přidání nové položky do seznamu
+  const handleAddItem = async () => {
     if (newItemName.trim() !== '') {
-      const newItem = {
-        id: items.length + 1,
-        name: newItemName,
-        status: 'todo',
-      };
+      try {
+        const response = await fetch(`http://localhost:3005/shoppingData/${id}/items`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: newItemName, status: 'todo' }),
+        });
 
-      setItems((prevItems) => [...prevItems, newItem]);
-      setNewItemName('');
+        if (!response.ok) {
+          throw new Error(`Error adding item: ${response.statusText}`);
+        }
+
+        const updatedList = await response.json();
+        setItems(updatedList.items || []);
+        setNewItemName('');
+      } catch (error) {
+        console.error('Error adding item:', error);
+      }
     }
   };
 
-  const handleDeleteItem = (itemId) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  // Smazání položky ze seznamu
+  const handleDeleteItem = async (itemId) => {
+    try {
+      const response = await fetch(`http://localhost:3005/shoppingData/${id}/items/${itemId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error deleting item: ${response.statusText}`);
+      }
+
+      const updatedList = await response.json();
+      setItems(updatedList.items || []);
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
   };
 
-  const handleToggleDone = (itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? { ...item, status: item.status === 'todo' ? 'done' : 'todo' } : item
-      )
-    );
+  // Přepnutí stavu položky mezi "todo" a "done"
+  const handleToggleDone = async (itemId) => {
+    try {
+      const response = await fetch(`http://localhost:3005/shoppingData/${id}/items/${itemId}`, {
+        method: 'PATCH',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error toggling item status: ${response.statusText}`);
+      }
+
+      const updatedList = await response.json();
+      setItems(updatedList.items || []);
+    } catch (error) {
+      console.error('Error toggling item status:', error);
+    }
   };
 
+  // Vykreslení komponenty
   return (
     <div className={styles.container}>
       <h2>Shopping List Detail</h2>
+
+      {/* Zobrazení informací o nákupním seznamu */}
       {shoppingList && (
         <div>
           <h2>Name: {shoppingList.name}</h2>
           <h2>User: {shoppingList.user}</h2>
         </div>
       )}
+
+      {/* Vykreslení seznamu položek */}
       <ul className={styles.list}>
         {items.map((item) => (
           <li key={item.id} className={`${styles.item} ${item.status === 'done' ? styles.done : ''}`}>
             <span>{item.name} - Status: {item.status}</span>
             <div>
+              {/* Tlačítka pro přepnutí stavu a smazání položky */}
               <button onClick={() => handleToggleDone(item.id)}>
                 {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
               </button>
@@ -57,6 +121,7 @@ const ShoppingListDetail = () => {
         ))}
       </ul>
 
+      {/* Formulář pro přidání nové položky */}
       <div className={styles.newItemForm}>
         <input
           type="text"
@@ -67,6 +132,7 @@ const ShoppingListDetail = () => {
         <button onClick={handleAddItem}>Add Item</button>
       </div>
 
+      {/* Odkaz na návrat na seznam nákupních seznamů */}
       <Link to="/" className={styles.backButton}>
         Back to Shopping Lists
       </Link>
