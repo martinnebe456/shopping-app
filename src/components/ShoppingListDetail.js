@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../css/ShoppingListDetail.module.css';
+import { ThemeContext } from './ThemeContext';
 
 // Komponenta pro detailní zobrazení nákupního seznamu
 const ShoppingListDetail = () => {
   // Získání id seznamu z URL parametrů
   const { id } = useParams();
-  
+
   // Stavové proměnné pro správu formuláře a dat
   const [newItemName, setNewItemName] = useState('');
   const [items, setItems] = useState([]);
   const [shoppingList, setShoppingList] = useState(null);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const themeClass = darkMode ? styles.darkMode : styles.lightMode;
 
   // Načtení dat nákupního seznamu při prvním renderu komponenty nebo změně id
   useEffect(() => {
@@ -94,49 +97,57 @@ const ShoppingListDetail = () => {
 
   // Vykreslení komponenty
   return (
-    <div className={styles.container}>
-      <h2>Shopping List Detail</h2>
+    <body className={themeClass}>
+      <div className={styles.container}>
+        <h2>Shopping List Detail</h2>
 
-      {/* Zobrazení informací o nákupním seznamu */}
-      {shoppingList && (
-        <div>
-          <h2>Name: {shoppingList.name}</h2>
-          <h2>User: {shoppingList.user}</h2>
+        {/* Zobrazení informací o nákupním seznamu */}
+        {shoppingList && (
+          <div>
+            <h2>Name: {shoppingList.name}</h2>
+            <h2>User: {shoppingList.user}</h2>
+          </div>
+        )}
+
+        {/* Vykreslení seznamu položek */}
+        <ul className={styles.list}>
+          {items.map((item) => (
+            <li key={item.id} className={`${styles.item} ${item.status === 'done' ? styles.done : ''}`}>
+              <span>{item.name} - Status: {item.status}</span>
+              <div>
+                {/* Tlačítka pro přepnutí stavu a smazání položky */}
+                <button onClick={() => handleToggleDone(item.id)}>
+                  {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
+                </button>
+                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Formulář pro přidání nové položky */}
+        <div className={styles.newItemForm}>
+          <input
+            type="text"
+            placeholder="New Item"
+            value={newItemName}
+            onChange={(e) => setNewItemName(e.target.value)}
+          />
+          <button onClick={handleAddItem}>Add Item</button>
         </div>
-      )}
-
-      {/* Vykreslení seznamu položek */}
-      <ul className={styles.list}>
-        {items.map((item) => (
-          <li key={item.id} className={`${styles.item} ${item.status === 'done' ? styles.done : ''}`}>
-            <span>{item.name} - Status: {item.status}</span>
-            <div>
-              {/* Tlačítka pro přepnutí stavu a smazání položky */}
-              <button onClick={() => handleToggleDone(item.id)}>
-                {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
-              </button>
-              <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      {/* Formulář pro přidání nové položky */}
-      <div className={styles.newItemForm}>
-        <input
-          type="text"
-          placeholder="New Item"
-          value={newItemName}
-          onChange={(e) => setNewItemName(e.target.value)}
-        />
-        <button onClick={handleAddItem}>Add Item</button>
+            
+        {/* Odkaz na návrat na seznam nákupních seznamů */}
+        <Link to="/" className={styles.backButton}>
+          Back to Shopping Lists
+        </Link>
+        <div>
+          <button className={styles.darkModeButton} onClick={toggleDarkMode}>
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
+        </div>
       </div>
-
-      {/* Odkaz na návrat na seznam nákupních seznamů */}
-      <Link to="/" className={styles.backButton}>
-        Back to Shopping Lists
-      </Link>
-    </div>
+      
+    </body>
   );
 };
 

@@ -1,88 +1,81 @@
-/* Styly pro hlavní kontejner */
 .container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 2px solid #3498db;
+  border: 2px solid #00A9FF; /* Modrá */
   border-radius: 10px;
-  background-color: #ecf0f1;
+  background-color: #CDF5FD; /* Světle modrá */
   position: relative;
 }
 
-/* Styly pro seznam */
 .list {
   list-style: none;
   padding: 0;
   margin-top: 20px;
 }
 
-/* Styly pro položky seznamu */
 .item {
   margin-bottom: 10px;
 }
 
-/* Styly pro odkazy v seznamu */
 .link {
   text-decoration: none;
-  color: #333;
+  color: #005f73; /* Tmavší modrá pro kontrast */
   font-weight: bold;
   display: block;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #89CFF3; /* Světle modrá */
   border-radius: 5px;
   transition: background-color 0.3s ease-in-out;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #A0E9FF; /* Velmi světle modrá */
   }
 }
 
-/* Styly pro zaškrtávací pole */
 .checkbox {
   margin-left: 10px;
 }
 
-/* Styly pro uživatelský dropdown */
 .userDropdown {
   margin-top: 10px;
   margin-left: 66%;
 }
 
-/* Styly pro dropdown */
 .dropdown {
   padding: 5px;
 }
 
-/* Styly pro tlačítko smazání */
 .deleteButton {
-  background-color: #d9534f;
-  color: #fff;
+  background-color: #f5c6cb; /* Světle červená */
+  color: #721c24; /* Tmavě červená */
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+  margin-top: 5px;
 
   &:hover {
-    background-color: #c9302c;
+    background-color: #d9534f; /* Červená */
   }
 }
 
-/* Styly pro tlačítko archivace */
 .archiveButton {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #00A9FF; /* Modrá */
+  color: #ffffff; /* Bílá */
   border: none;
   padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
   margin-left: 5px;
+  margin-top: 5px;
   
   &:hover {
-    background-color: #024996;
+    background-color: #007bff; /* Tmavší modrá */
   }
 }
 
-/* Styly pro formulář pro vytvoření nového seznamu */
 .newListForm {
   margin-top: 20px;
   display: flex;
@@ -92,20 +85,99 @@
 .newListForm input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #89CFF3; /* Světle modrá */
   border-radius: 5px;
 }
 
 .newListForm button {
   padding: 10px;
-  background-color: #3498db;
+  background-color: #00A9FF; /* Modrá */
   color: #fff;
-  border: 1px solid #2980b9;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: #007bff; /* Tmavší modrá */
   }
+}
+
+.darkModeButton {
+  background-color: #005f73; /* Tmavší modrá */
+  color: #CDF5FD; /* Světle modrá */
+  border: 1px solid #00A9FF; /* Modrá */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #003a4a; /* Ještě tmavší modrá */
+  }
+}
+
+.darkMode .container {
+  background-color: #0E2954; /* Tmavě modrá barva pozadí pro kontejner */
+  color: #84A7A1; /* Světle modrozelená barva textu */
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .link {
+  color: #84A7A1; /* Světle modrozelená barva textu pro kontrast */
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .link:hover {
+  background-color: #2E8A99; /* Světlejší modrá barva pozadí pro hover stav */
+}
+
+.darkMode .deleteButton {
+  background-color: #451952; /* Tmavě modrá barva pozadí pro delete tlačítko */
+  color: #CDF5FD; /* Světle modrozelená barva textu pro kontrast */
+}
+
+.darkMode .deleteButton:hover {
+  background-color: #512B81; /* Světlejší modrá barva pozadí při hover */
+}
+
+.darkMode .archiveButton {
+  background-color: #2E8A99; /* Středně modrá */
+  color: #CDF5FD; /* Světle modrozelená barva textu */
+}
+
+.darkMode .archiveButton:hover {
+  background-color: #1F6E8C; /* Tmavě modrá barva při hover */
+}
+
+.darkMode .newListForm input {
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .newListForm button {
+  background-color: #2E8A99; /* Středně modrá */
+  color: #CDF5FD; /* Světle modrozelená barva textu */
+}
+
+.darkMode .newListForm button:hover {
+  background-color: #1F6E8C; /* Tmavě modrá barva při hover */
+}
+
+.darkMode .darkModeButton {
+  background-color: #59cdd1; /* Světlejší modrá barva pozadí pro tlačítko dark modu */
+  color: #02161a; /* Světle modrozelená barva textu */
+}
+
+.darkMode .darkModeButton:hover {
+  background-color: #1F6E8C; /* Středně modrá barva pozadí při hover */
+}
+
+body {
+  background-color: #ffffff; /* Bílé pozadí */
+}
+
+/* Tmavý režim */
+.darkMode body {
+  background-color: #000000; /* Černé pozadí */
 }

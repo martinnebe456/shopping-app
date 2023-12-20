@@ -3,9 +3,10 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 2px solid #3498db;
+  border: 2px solid #00A9FF; /* Modrá */
   border-radius: 10px;
-  background-color: #ecf0f1;
+  background-color: #CDF5FD; /* Světle modrá */
+  position: relative;
 }
 
 /* Styly pro seznam */
@@ -23,16 +24,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* Styl pro stav "todo" */
-  background-color: #e74c3c;
+  border: 1px solid #89CFF3; /* Světle modrá */
+  background-color: #e74c3c; /* Původní červená pro "todo" */
   color: #fff;
+  transition: background-color 0.3s ease-in-out;
 }
+
 
 /* Styl pro stav "done" */
 .item.done {
   background-color: #2ecc71;
-  color: #fff;
 }
 
 /* Společný styl pro text položky */
@@ -49,14 +50,15 @@
   padding: 5px;
   background-color: #3498db;
   color: #fff;
-  border: 1px solid #2980b9;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  margin-left: 5px;
+}
 
-  &:hover {
-    background-color: #2980b9;
-  }
+.item button:hover {
+  background-color: #007bff; /* Tmavší modrá */
 }
 
 /* Styly pro formulář pro vytvoření nové položky */
@@ -69,22 +71,22 @@
 .newItemForm input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #89CFF3; /* Světle modrá */
   border-radius: 5px;
 }
 
 .newItemForm button {
   padding: 10px;
-  background-color: #3498db;
+  background-color: #00A9FF; /* Modrá */
   color: #fff;
-  border: 1px solid #2980b9;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+}
 
-  &:hover {
-    background-color: #2980b9;
-  }
+.newItemForm button:hover {
+  background-color: #007bff; /* Tmavší modrá */
 }
 
 /* Styly pro tlačítko zpět */
@@ -92,15 +94,110 @@
   display: block;
   margin-top: 20px;
   padding: 10px;
-  background-color: #3498db;
+  background-color: #00A9FF; /* Modrá */
   color: #fff;
   text-decoration: none;
-  border: 1px solid #2980b9;
+  border: none;
   border-radius: 5px;
   text-align: center;
   transition: background-color 0.3s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: #007bff; /* Tmavší modrá */
+}
+
+.darkModeButton {
+  background-color: #005f73; /* Tmavší modrá */
+  color: #CDF5FD; /* Světle modrá */
+  border: 1px solid #00A9FF; /* Modrá */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s ease-in-out;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: #003a4a; /* Ještě tmavší modrá */
   }
+}
+
+.darkMode .container {
+  background-color: #0E2954; /* Tmavě modrá barva pozadí pro kontejner */
+  color: #84A7A1; /* Světle modrozelená barva textu */
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .link {
+  color: #84A7A1; /* Světle modrozelená barva textu pro kontrast */
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .link:hover {
+  background-color: #2E8A99; /* Světlejší modrá barva pozadí pro hover stav */
+}
+
+.darkMode .deleteButton {
+  background-color: #451952; /* Tmavě modrá barva pozadí pro delete tlačítko */
+  color: #CDF5FD; /* Světle modrozelená barva textu pro kontrast */
+}
+
+.darkMode .deleteButton:hover {
+  background-color: #512B81; /* Světlejší modrá barva pozadí při hover */
+}
+
+.darkMode .newItemForm input {
+  border-color: #1F6E8C; /* Středně modrá barva okraje */
+}
+
+.darkMode .newItemForm button {
+  background-color: #2E8A99; /* Středně modrá */
+  color: #CDF5FD; /* Světle modrozelená barva textu */
+}
+
+.darkMode .newItemForm button:hover {
+  background-color: #1F6E8C; /* Tmavě modrá barva při hover */
+}
+
+.darkMode .darkModeButton {
+  background-color: #59cdd1; /* Světlejší modrá barva pozadí pro tlačítko dark modu */
+  color: #02161a; /* Světle modrozelená barva textu */
+}
+
+.darkMode .darkModeButton:hover {
+  background-color: #1F6E8C; /* Středně modrá barva pozadí při hover */
+}
+
+.darkMode .item button {
+  background-color: #1F6E8C; /* Středně modrá barva okraje */
+  color: #FFF;
+}
+
+.darkMode .item {
+  background-color: #460000; /* Dark red color */
+  color: #FFF;
+}
+
+.darkMode .item.done {
+  background-color: #003a4a; /* Dark green color */
+  color: #FFF;
+}
+
+.darkMode .backButton {
+  background-color: #005f73; /* Tmavě modrá */
+  color: #CDF5FD; /* Světle modrá */
+  border: 1px solid #00A9FF; /* Modrá */
+}
+
+.darkMode .backButton:hover {
+  background-color: #003a4a; /* Ještě tmavě modrá */
+}
+
+body {
+  background-color: #ffffff; /* Bílé pozadí */
+}
+
+/* Tmavý režim */
+.darkMode body {
+  background-color: #000000; /* Černé pozadí */
 }
