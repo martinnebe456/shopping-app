@@ -1,3 +1,10 @@
+body {
+  background-color: rgb(83, 83, 83);
+}
+
+.main {
+  background-color: rgb(83, 83, 83);
+}
 /* Styly pro hlavní kontejner */
 .container {
   max-width: 600px;

@@ -100,13 +100,13 @@ const ShoppingListDetail = () => {
     <div className={styles.main}>
     <div className={themeClass}>
       <div className={styles.container}>
-        <h2>Shopping List Detail</h2>
+        <h2>Einkaufsliste detail</h2>
 
         {/* Zobrazení informací o nákupním seznamu */}
         {shoppingList && (
           <div>
             <h2>Name: {shoppingList.name}</h2>
-            <h2>User: {shoppingList.user}</h2>
+            <h2>Benutzer: {shoppingList.user}</h2>
           </div>
         )}
 
@@ -118,9 +118,9 @@ const ShoppingListDetail = () => {
               <div>
                 {/* Tlačítka pro přepnutí stavu a smazání položky */}
                 <button onClick={() => handleToggleDone(item.id)}>
-                  {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
+                  {item.status === 'todo' ? 'als erledigt markieren' : 'Als erledigt markieren'}
                 </button>
-                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                <button onClick={() => handleDeleteItem(item.id)}>löschen</button>
               </div>
             </li>
           ))}
@@ -130,20 +130,20 @@ const ShoppingListDetail = () => {
         <div className={styles.newItemForm}>
           <input
             type="text"
-            placeholder="New Item"
+            placeholder="Neuer Gegenstand"
             value={newItemName}
             onChange={(e) => setNewItemName(e.target.value)}
           />
-          <button onClick={handleAddItem}>Add Item</button>
+          <button onClick={handleAddItem}>Artikel hinzufügen</button>
         </div>
             
         {/* Odkaz na návrat na seznam nákupních seznamů */}
         <Link to="/" className={styles.backButton}>
-          Back to Shopping Lists
+        Zurück zu den Einkaufslisten
         </Link>
         <div>
           <button className={styles.darkModeButton} onClick={toggleDarkMode}>
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
+            {darkMode ? 'Lichtmodus' : 'Dunkler Modus'}
           </button>
         </div>
       </div>

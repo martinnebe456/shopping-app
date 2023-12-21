@@ -116,7 +116,7 @@ const ShoppingLists = () => {
         {/* Dropdown pro výběr uživatele */}
         <div className={styles.userDropdown}>
           <label>
-            Select user:
+            Uživatel:
             <select
               value={selectedUser}
               onChange={(e) => setSelectedUser(e.target.value)}
@@ -131,11 +131,11 @@ const ShoppingLists = () => {
           </label>
         </div>
 
-        <h2>Shopping Lists</h2>
+        <h2>Nákupní seznam</h2>
 
         {/* Checkbox pro zobrazení archivovaných seznamů */}
         <label>
-          Show archived lists
+          Archivované seznamy:
           <input
             type="checkbox"
             checked={showArchived}
@@ -154,23 +154,23 @@ const ShoppingLists = () => {
                 <li key={list.id} className={styles.item}>
                   <Link to={`/shopping-lists/${list.id}`} className={styles.link}>
                     {list.name} - {list.user}
-                    {list.archived && ' (Archived)'}
+                    {list.archived && ' (Archivovaný)'}
                   </Link>
 
                   {/* Tlačítka pro smazání a archivaci seznamu */}
                   {canDeleteList(list) && (
                     <div>
                       <button onClick={() => deleteList(list.id)} className={styles.deleteButton}>
-                        Delete
+                        Smazat
                       </button>
                       {confirmDeleteId === list.id && (
                         <div>
-                          <p>Are you sure you want to delete this list?</p>
+                          <p>Jste si jistý, že chcete smazat tento seznam?</p>
                           <button onClick={confirmDelete} className={styles.confirmButton}>
-                            Confirm
+                            Potvrdit
                           </button>
                           <button onClick={cancelDelete} className={styles.cancelButton}>
-                            Cancel
+                            Zrušit
                           </button>
                         </div>
                       )}
@@ -178,7 +178,7 @@ const ShoppingLists = () => {
                   )}
                   {canArchiveList(list) && (
                     <button onClick={() => archiveList(list.id)} className={styles.archiveButton}>
-                      Archive
+                      Archivovat
                     </button>
                   )}
                 </li>
@@ -191,17 +191,17 @@ const ShoppingLists = () => {
         <div className={styles.newListForm}>
           <input
             type="text"
-            placeholder="New Shopping List"
+            placeholder="Nový seznam"
             value={newListName}
             onChange={(e) => setNewListName(e.target.value)}
           />
           <button onClick={handleCreateList} className={styles.createButton}>
-            Create List
+            Vytovřit seznam
           </button>
         </div>
         <div>
           <button className={styles.darkModeButton} onClick={toggleDarkMode}>
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
+            {darkMode ? 'Světlý režim' : 'Tmavý režim'}
           </button>
         </div>
       </div>

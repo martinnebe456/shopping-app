@@ -1,3 +1,10 @@
+body {
+  background-color: rgb(83, 83, 83);
+}
+
+.main {
+  background-color: rgb(83, 83, 83);
+}
 .container {
   max-width: 600px;
   margin: 0 auto;

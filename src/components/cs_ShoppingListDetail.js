@@ -100,13 +100,13 @@ const ShoppingListDetail = () => {
     <div className={styles.main}>
     <div className={themeClass}>
       <div className={styles.container}>
-        <h2>Shopping List Detail</h2>
+        <h2>Detail nákupního seznamu</h2>
 
         {/* Zobrazení informací o nákupním seznamu */}
         {shoppingList && (
           <div>
-            <h2>Name: {shoppingList.name}</h2>
-            <h2>User: {shoppingList.user}</h2>
+            <h2>Název: {shoppingList.name}</h2>
+            <h2>Uživatel: {shoppingList.user}</h2>
           </div>
         )}
 
@@ -118,7 +118,7 @@ const ShoppingListDetail = () => {
               <div>
                 {/* Tlačítka pro přepnutí stavu a smazání položky */}
                 <button onClick={() => handleToggleDone(item.id)}>
-                  {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
+                  {item.status === 'todo' ? 'Dokončit' : 'Zrušit dokončení'}
                 </button>
                 <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
               </div>
@@ -130,20 +130,20 @@ const ShoppingListDetail = () => {
         <div className={styles.newItemForm}>
           <input
             type="text"
-            placeholder="New Item"
+            placeholder="Nová položka"
             value={newItemName}
             onChange={(e) => setNewItemName(e.target.value)}
           />
-          <button onClick={handleAddItem}>Add Item</button>
+          <button onClick={handleAddItem}>Přidat položku</button>
         </div>
             
         {/* Odkaz na návrat na seznam nákupních seznamů */}
         <Link to="/" className={styles.backButton}>
-          Back to Shopping Lists
+          Zpátky na seznam nákupních seznamů
         </Link>
         <div>
           <button className={styles.darkModeButton} onClick={toggleDarkMode}>
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
+            {darkMode ? 'Světly režim' : 'Tmavý režim'}
           </button>
         </div>
       </div>
