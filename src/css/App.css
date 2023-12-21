@@ -6,3 +6,13 @@
     background-color: rgb(83, 83, 83);
     padding: 15px;
 }
+
+.language-selector select {
+    margin-top: 10px;
+    margin-left: 45%;
+    color: #2B2A4C; 
+    border: 1px solid #B31312; 
+    background-color: #EA906C; 
+    padding: 10px;
+    border-radius: 5px;
+    }

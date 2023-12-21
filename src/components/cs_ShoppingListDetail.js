@@ -120,7 +120,7 @@ const ShoppingListDetail = () => {
                 <button onClick={() => handleToggleDone(item.id)}>
                   {item.status === 'todo' ? 'Dokončit' : 'Zrušit dokončení'}
                 </button>
-                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                <button onClick={() => handleDeleteItem(item.id)}>Smazat</button>
               </div>
             </li>
           ))}
