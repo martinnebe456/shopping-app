@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../css/ShoppingListDetail.module.css';
 import { ThemeContext } from './ThemeContext';
+import { PieChart, Pie, Cell } from 'recharts';
 
 // Komponenta pro detailní zobrazení nákupního seznamu
 const ShoppingListDetail = () => {
@@ -95,6 +96,30 @@ const ShoppingListDetail = () => {
     }
   };
 
+  const pieChartData = items.map((item) => ({
+    name: item.name,
+    value: item.status === 'done' ? 1 : 0
+  }));
+
+  const summarisedData = pieChartData.reduce((acc, item) => {
+    if (item.value === 1) {
+      acc[0].value += 1;
+    } else if (item.value === 0) {
+      acc[1].value += 1;
+    }
+    return acc;
+  }, [{ name: 'Value 1', value: 0 }, { name: 'Value 0', value: 0 }]);
+
+  //console.log(summarisedData);
+  //console.log(pieChartData);
+  
+  const lightModeColors = ["#2ecc71", "#e74c3c"];
+  const darkModeColors = [ "#003a4a", "#460000"];
+
+  const getFillColor = (index) => {
+    return darkMode ? darkModeColors[index % darkModeColors.length] : lightModeColors[index % lightModeColors.length];
+  };
+
   // Vykreslení komponenty
   return (
     <div className={styles.main}>
@@ -136,6 +161,25 @@ const ShoppingListDetail = () => {
           />
           <button onClick={handleAddItem}>Přidat položku</button>
         </div>
+
+        {/* Vykreslení grafu stavu položek */}
+        <div className={styles.pieChart}>
+            <PieChart width={400} height={400}>
+              <Pie
+                data={summarisedData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={150}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {summarisedData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={getFillColor(index)} />
+                ))}
+              </Pie>
+            </PieChart>
+          </div>
             
         {/* Odkaz na návrat na seznam nákupních seznamů */}
         <Link to="/" className={styles.backButton}>

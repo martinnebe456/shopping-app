@@ -55,7 +55,42 @@
           "id": 5,
           "name": "Vegetables",
           "status": "done"
-        }
+        },
+        {
+          "id": 12,
+          "name": "Cheese",
+          "status": "todo"
+        },
+        {
+          "id": 13,
+          "name": "Butter",
+          "status": "todo"
+        },
+        {
+          "id": 14,
+          "name": "Yogurt",
+          "status": "todo"
+        },
+        {
+          "id": 15,
+          "name": "Cereal",
+          "status": "todo"
+        },
+        {
+          "id": 16,
+          "name": "Ice cream",
+          "status": "todo"
+        },
+        {
+          "id": 17,
+          "name": "Coke",
+          "status": "todo"
+        },
+        {
+          "id": 18,
+          "name": "Water",
+          "status": "todo"
+        }        
       ]
     },
     {
@@ -80,21 +115,36 @@
         {
           "id": 7,
           "name": "Phone",
-          "status": "todo"
+          "status": "done"
         },
         {
           "id": 8,
           "name": "Headphones",
-          "status": "todo"
+          "status": "done"
         },
         {
           "id": 9,
           "name": "Camera",
-          "status": "todo"
+          "status": "done"
         },
         {
           "id": 10,
           "name": "Smartwatch",
+          "status": "done"
+        },
+        {
+          "id": 11,
+          "name": "Tablet",
+          "status": "done"
+        },
+        {
+          "id": 12,
+          "name": "Keyboard",
+          "status": "done"
+        },
+        {
+          "id": 13,
+          "name": "Mouse",
           "status": "todo"
         }
       ]

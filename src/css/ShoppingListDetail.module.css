@@ -114,6 +114,11 @@ body {
   background-color: #007bff; /* Tmavší modrá */
 }
 
+.pieChart {
+  margin: auto;
+  width: 65%;
+}
+
 .darkModeButton {
   background-color: #005f73; /* Tmavší modrá */
   color: #CDF5FD; /* Světle modrá */

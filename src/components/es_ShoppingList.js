@@ -1,9 +1,11 @@
+/* eslint-disable no-lone-blocks */
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../css/ShoppingLists.module.css';
 import { getShoppingLists, createShoppingList, deleteShoppingList, archiveShoppingList } from '../services/ShoppingListService';
 import { users } from '../data/Users';
 import { ThemeContext } from './ThemeContext';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const ShoppingLists = () => {
   const [newListName, setNewListName] = useState('');
@@ -109,6 +111,17 @@ const ShoppingLists = () => {
     return list.user === selectedUser;
   };
 
+  {/* Výběř pro zobrazení archivovaných seznamů v grafu */}
+  const filteredData = shoppingData
+      .filter(list => showArchived || !list.archived)
+      .map(list => ({
+        name: list.name,
+        itemCount: list.items.length,
+      }));
+
+      const lightModeBarColor = "#005f73";
+      const darkModeBarColor = "#59cdd1";
+
   return (
     <div className={styles.main}>
     <div className={themeClass}>
@@ -204,6 +217,24 @@ const ShoppingLists = () => {
             {darkMode ? 'Modo de luz' : 'Modo oscuro'}
           </button>
         </div>
+        {/* Graf */}
+        <div className={styles.chart}>
+            <BarChart
+              width={600}
+              height={300}
+              data={filteredData}
+              margin={{
+                top: 5, right: 30, left: 20, bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="itemCount" fill={darkMode ? darkModeBarColor : lightModeBarColor} />
+            </BarChart>
+          </div>
       </div>
     </div>
     </div>

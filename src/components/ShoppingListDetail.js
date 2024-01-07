@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../css/ShoppingListDetail.module.css';
 import { ThemeContext } from './ThemeContext';
+import { PieChart, Pie, Cell } from 'recharts';
 
 // Komponenta pro detailní zobrazení nákupního seznamu
 const ShoppingListDetail = () => {
@@ -95,60 +96,103 @@ const ShoppingListDetail = () => {
     }
   };
 
+  const pieChartData = items.map((item) => ({
+    name: item.name,
+    value: item.status === 'done' ? 1 : 0
+  }));
+
+  const summarisedData = pieChartData.reduce((acc, item) => {
+    if (item.value === 1) {
+      acc[0].value += 1;
+    } else if (item.value === 0) {
+      acc[1].value += 1;
+    }
+    return acc;
+  }, [{ name: 'Value 1', value: 0 }, { name: 'Value 0', value: 0 }]);
+
+  //console.log(summarisedData);
+  //console.log(pieChartData);
+  
+  const lightModeColors = ["#2ecc71", "#e74c3c"];
+  const darkModeColors = [ "#003a4a", "#460000"];
+
+  const getFillColor = (index) => {
+    return darkMode ? darkModeColors[index % darkModeColors.length] : lightModeColors[index % lightModeColors.length];
+  };
+
   // Vykreslení komponenty
   return (
     <div className={styles.main}>
-    <div className={themeClass}>
-      <div className={styles.container}>
-        <h2>Shopping List Detail</h2>
+      <div className={themeClass}>
+        <div className={styles.container}>
+          <h2>Shopping List Detail</h2>
 
-        {/* Zobrazení informací o nákupním seznamu */}
-        {shoppingList && (
-          <div>
-            <h2>Name: {shoppingList.name}</h2>
-            <h2>User: {shoppingList.user}</h2>
+          {/* Zobrazení informací o nákupním seznamu */}
+          {shoppingList && (
+            <div>
+              <h2>Name: {shoppingList.name}</h2>
+              <h2>User: {shoppingList.user}</h2>
+            </div>
+          )}
+
+          {/* Vykreslení seznamu položek */}
+          <ul className={styles.list}>
+            {items.map((item) => (
+              <li key={item.id} className={`${styles.item} ${item.status === 'done' ? styles.done : ''}`}>
+                <span>{item.name} - Status: {item.status}</span>
+                <div>
+                  {/* Tlačítka pro přepnutí stavu a smazání položky */}
+                  <button onClick={() => handleToggleDone(item.id)}>
+                    {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
+                  </button>
+                  <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Formulář pro přidání nové položky */}
+          <div className={styles.newItemForm}>
+            <input
+              type="text"
+              placeholder="New Item"
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
+            />
+            <button onClick={handleAddItem}>Add Item</button>
           </div>
-        )}
 
-        {/* Vykreslení seznamu položek */}
-        <ul className={styles.list}>
-          {items.map((item) => (
-            <li key={item.id} className={`${styles.item} ${item.status === 'done' ? styles.done : ''}`}>
-              <span>{item.name} - Status: {item.status}</span>
-              <div>
-                {/* Tlačítka pro přepnutí stavu a smazání položky */}
-                <button onClick={() => handleToggleDone(item.id)}>
-                  {item.status === 'todo' ? 'Mark as Done' : 'Mark as Todo'}
-                </button>
-                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+          {/* Vykreslení grafu stavu položek */}
+          <div className={styles.pieChart}>
+            <PieChart width={400} height={400}>
+              <Pie
+                data={summarisedData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={150}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {summarisedData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={getFillColor(index)} />
+                ))}
+              </Pie>
+            </PieChart>
+          </div>
 
-        {/* Formulář pro přidání nové položky */}
-        <div className={styles.newItemForm}>
-          <input
-            type="text"
-            placeholder="New Item"
-            value={newItemName}
-            onChange={(e) => setNewItemName(e.target.value)}
-          />
-          <button onClick={handleAddItem}>Add Item</button>
+          {/* Odkaz na návrat na seznam nákupních seznamů */}
+          <Link to="/" className={styles.backButton}>
+            Back to Shopping Lists
+          </Link>
+          <div>
+            <button className={styles.darkModeButton} onClick={toggleDarkMode}>
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
+          </div>
         </div>
-            
-        {/* Odkaz na návrat na seznam nákupních seznamů */}
-        <Link to="/" className={styles.backButton}>
-          Back to Shopping Lists
-        </Link>
-        <div>
-          <button className={styles.darkModeButton} onClick={toggleDarkMode}>
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
-        </div>
+
       </div>
-      
-    </div>
     </div>
   );
 };

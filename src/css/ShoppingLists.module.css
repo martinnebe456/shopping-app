@@ -125,6 +125,10 @@ body {
   }
 }
 
+.chart {
+  margin-top: 20px;
+}
+
 .darkMode .container {
   background-color: #0E2954; /* Tmavě modrá barva pozadí pro kontejner */
   color: #84A7A1; /* Světle modrozelená barva textu */
